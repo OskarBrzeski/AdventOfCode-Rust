@@ -5,7 +5,7 @@ fn main() {
         days::day1::solution(),
     ];
 
-    for (i, s) in solutions.iter().enumerate() {
-        println!("Day {}: {}", i+1, s);
+    for (s, i) in solutions.iter().zip(1..=25) {
+        println!("Day {}: {}", i, s);
     }
 }
