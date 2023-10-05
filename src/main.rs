@@ -7,6 +7,6 @@ fn main() {
     ];
 
     for (s, i) in solutions.iter().zip(1..=25) {
-        println!("Day {}: {}", i, s);
+        println!("Day {}: {:?}", i, s);
     }
 }

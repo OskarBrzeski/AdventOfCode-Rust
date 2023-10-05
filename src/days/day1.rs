@@ -1,7 +1,7 @@
 use std::fs;
 use std::path::Path;
 
-pub fn solution() -> isize {
+pub fn solution() -> (isize, isize) {
     let file_content = fs::read_to_string(Path::new("data/input1.txt"))
         .expect("Should be able to read file");
 
@@ -24,8 +24,11 @@ pub fn solution() -> isize {
         calories[i] = calories[i] + line_num;
     }
 
-    match calories.iter().max() {
-        Some(i) => i.clone(),
-        None => -1,
-    }
+    calories.sort();
+    calories.reverse();
+
+    return (
+        calories.first().unwrap().clone(),
+        calories[0..3].iter().sum(),
+    )
 }
