@@ -2,7 +2,7 @@ use std::fs;
 use std::path::Path;
 
 pub fn solution() -> isize {
-    let file_content = fs::read_to_string(Path::new("data/input.txt"))
+    let file_content = fs::read_to_string(Path::new("data/input1.txt"))
         .expect("Should be able to read file");
 
     let lines: Vec<&str> = file_content.split("\r\n").collect();
