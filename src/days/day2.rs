@@ -1,7 +1,7 @@
 use std::fs;
 use std::path::Path;
 
-pub fn solution() -> isize {
+pub fn solution() -> (isize, isize) {
     let file_content = fs::read_to_string(Path::new("data/input2.txt"))
         .expect("Should be able to read file");
 
@@ -24,5 +24,5 @@ pub fn solution() -> isize {
         }
     }
     
-    score
+    return (score, 0)
 }
