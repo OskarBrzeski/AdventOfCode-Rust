@@ -18,7 +18,7 @@ pub fn solution() -> (i32, i32) {
 fn part1(lines: Lines) -> i32 {
     let mut score: i32 = 0;
 
-    for line in lines.into_iter() {
+    for line in lines {
         score += match line {
             "A X" => 4,
             "A Y" => 8,
@@ -39,7 +39,7 @@ fn part1(lines: Lines) -> i32 {
 fn part2(lines: Lines) -> i32 {
     let mut score: i32 = 0;
 
-    for line in lines.into_iter() {
+    for line in lines {
         score += match line {
             "A X" => 3,
             "A Y" => 4,
