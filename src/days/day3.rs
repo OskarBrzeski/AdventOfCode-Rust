@@ -1,21 +1,23 @@
 use std::fs;
 use std::path::Path;
-use std::str::Split;
+use std::str::Lines;
 
-pub fn solution() -> (isize, isize) {
+pub fn solution() -> (i32, i32) {
     let file_content = fs::read_to_string(Path::new("data/input3.txt"))
         .expect("Should be able to read file");
 
-    let lines = file_content.split("\r\n");
+    let lines = file_content.lines();
 
-    (part1(&lines), part2(&lines))
+    (
+        part1(lines.clone()),
+        part2(lines.clone()),
+    )
 }
 
-fn part1(lines: &Split<&str>) -> isize {
-    let mut result: isize = 0;
+fn part1(lines: Lines) -> i32 {
+    let mut result: i32 = 0;
 
-    for line in lines.clone() {
-
+    for line in lines {
         let line_bytes = line.as_bytes();
         let mut done = [false; 52];
 
@@ -29,7 +31,7 @@ fn part1(lines: &Split<&str>) -> isize {
             let character_index = convert(character);
 
             if done[character_index] {
-                result += (character_index + 1) as isize;
+                result += (character_index + 1) as i32;
                 break;
             }
         }
@@ -38,9 +40,10 @@ fn part1(lines: &Split<&str>) -> isize {
     result
 }
 
-fn part2(lines: &Split<&str>) -> isize {
-    let mut result: isize = 0;
-    let lines: Vec<&str> = lines.clone().collect();
+fn part2(lines: Lines) -> i32 {
+    let mut result: i32 = 0;
+
+    let lines: Vec<&str> = lines.collect();
 
     for i in 0..lines.len()/3 {
         let mut done = [false; 52*3];
@@ -57,7 +60,7 @@ fn part2(lines: &Split<&str>) -> isize {
 
         for j in 0..52 {
             if done[j] && done[j + 52] && done[j + 104] {
-                result += (j + 1) as isize;
+                result += (j + 1) as i32;
             }
         }
     }

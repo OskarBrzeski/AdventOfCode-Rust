@@ -1,13 +1,13 @@
 use std::fs;
 use std::path::Path;
 
-pub fn solution() -> (isize, isize) {
+pub fn solution() -> (i32, i32) {
     let file_content = fs::read_to_string(Path::new("data/input1.txt"))
         .expect("Should be able to read file");
 
-    let lines: Vec<&str> = file_content.split("\r\n").collect();
+    let lines = file_content.lines();
 
-    let mut calories: Vec<isize> = vec![0];
+    let mut calories: Vec<i32> = vec![0];
     let mut i = 0;
 
     for line in lines {
@@ -20,14 +20,14 @@ pub fn solution() -> (isize, isize) {
             continue;
         }
 
-        let line_num: isize = line.parse().unwrap();
+        let line_num: i32 = line.parse().unwrap();
         calories[i] = calories[i] + line_num;
     }
 
     calories.sort();
     calories.reverse();
 
-    return (
+    (
         calories.first().unwrap().clone(),
         calories[0..3].iter().sum(),
     )

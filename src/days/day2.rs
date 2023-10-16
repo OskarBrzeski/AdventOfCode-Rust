@@ -1,20 +1,24 @@
+use core::panic;
 use std::fs;
 use std::path::Path;
-use std::str::Split;
+use std::str::Lines;
 
-pub fn solution() -> (isize, isize) {
+pub fn solution() -> (i32, i32) {
     let file_content = fs::read_to_string(Path::new("data/input2.txt"))
         .expect("Should be able to read file");
 
-    let lines = file_content.split("\r\n");
+    let lines = file_content.lines();
     
-    return (part1(&lines), part2(&lines))
+    (
+        part1(lines.clone()),
+        part2(lines.clone()),
+    )
 }
 
-fn part1(lines: &Split<&str>) -> isize {
-    let mut score: isize = 0;
+fn part1(lines: Lines) -> i32 {
+    let mut score: i32 = 0;
 
-    for line in lines.clone().into_iter() {
+    for line in lines.into_iter() {
         score += match line {
             "A X" => 4,
             "A Y" => 8,
@@ -25,17 +29,17 @@ fn part1(lines: &Split<&str>) -> isize {
             "C X" => 7,
             "C Y" => 2,
             "C Z" => 6,
-            _ => 0,
+            _ => panic!("Unknown Line ({})", line),
         }
     }
 
     score
 }
 
-fn part2(lines: &Split<&str>) -> isize {
-    let mut score: isize = 0;
+fn part2(lines: Lines) -> i32 {
+    let mut score: i32 = 0;
 
-    for line in lines.clone().into_iter() {
+    for line in lines.into_iter() {
         score += match line {
             "A X" => 3,
             "A Y" => 4,
@@ -46,7 +50,7 @@ fn part2(lines: &Split<&str>) -> isize {
             "C X" => 2,
             "C Y" => 6,
             "C Z" => 7,
-            _ => -1,
+            _ => panic!("Unknown Line ({})", line),
         }
     }
 

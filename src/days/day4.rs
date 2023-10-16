@@ -1,12 +1,12 @@
 use std::fs;
 use std::path::Path;
-use std::str::Split;
+use std::str::Lines;
 
-pub fn solution() -> (isize, isize) {
+pub fn solution() -> (i32, i32) {
     let file_content = fs::read_to_string(Path::new("data/input4.txt"))
         .expect("Should be able to read file");
 
-    let lines = file_content.split("\r\n");
+    let lines = file_content.lines();
 
     (
         part1(lines.clone()),
@@ -14,7 +14,7 @@ pub fn solution() -> (isize, isize) {
     )
 }
 
-fn part1(lines: Split<&str>) -> isize {
+fn part1(lines: Lines) -> i32 {
     let mut count = 0;
 
     for line in lines {
@@ -29,7 +29,7 @@ fn part1(lines: Split<&str>) -> isize {
     count
 }
 
-fn part2(lines: Split<&str>) -> isize {
+fn part2(lines: Lines) -> i32 {
     let mut count = 0;
 
     for line in lines {
@@ -42,7 +42,7 @@ fn part2(lines: Split<&str>) -> isize {
     count
 }
 
-fn get_values(line: &str) -> Vec<isize> {
+fn get_values(line: &str) -> Vec<i32> {
     let (left, right) = line.split_once(",")
         .expect(format!("Not a standard line {}", line).as_str());
 
