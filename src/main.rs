@@ -5,7 +5,7 @@ fn main() {
     println!("Day 2: {:?}", days::day2::solution());
     println!("Day 3: {:?}", days::day3::solution());
     println!("Day 4: {:?}", days::day4::solution());
-    // println!("Day 5: {:?}", days::day5::solution());
+    println!("Day 5: {:?}", days::day5::solution());
     // println!("Day 6: {:?}", days::day6::solution());
     // println!("Day 7: {:?}", days::day7::solution());
     // println!("Day 8: {:?}", days::day8::solution());
