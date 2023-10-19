@@ -19,23 +19,34 @@ fn part1(mut lines: Lines) -> String {
 
     for line in lines {
         let (amount, from, to) = get_instructions(line);
+        
         for _ in 0..amount {
             let value = config[from-1].pop().unwrap();
             config[to-1].push(value);
         }
     }
     
-    let mut answer: [u8; 9] = [0; 9];
-    for i in 0..9 {
-        let value = config[i].pop().unwrap();
-        answer[i] = value;
-    }
-
-    String::from(from_utf8(&answer).unwrap())
+    array_to_string(config)
 }
 
 fn part2(mut lines: Lines) -> String {
-    String::new()
+    let mut config = starting_config(&mut lines);
+
+    for line in lines {
+        let (amount, from, to) = get_instructions(line);
+        
+        let mut temp: Vec<u8> = vec![];
+        for _ in 0..amount {
+            let value = config[from-1].pop().unwrap();
+            temp.push(value);
+        }
+        for _ in 0..amount {
+            let value = temp.pop().unwrap();
+            config[to-1].push(value);
+        }
+    }
+    
+    array_to_string(config)
 }
 
 fn starting_config(lines: &mut Lines) -> [Vec<u8>; 9] {
@@ -77,4 +88,14 @@ fn get_instructions(line: &str) -> (usize, usize, usize) {
         parts[3].parse().expect("Should be a number"),
         parts[5].parse().expect("Should be a number"),
     )
+}
+
+fn array_to_string(mut config: [Vec<u8>; 9]) -> String {
+    let mut answer: [u8; 9] = [0; 9];
+    for i in 0..9 {
+        let value = config[i].pop().unwrap();
+        answer[i] = value;
+    }
+
+    String::from(from_utf8(&answer).unwrap())
 }
