@@ -42,7 +42,7 @@ fn part2(lines: Lines) -> i32 {
     count
 }
 
-fn get_values(line: &str) -> Vec<i32> {
+fn get_values(line: &str) -> [i32; 4] {
     let (left, right) = line.split_once(",")
         .expect(format!("Not a standard line {}", line).as_str());
 
@@ -51,7 +51,7 @@ fn get_values(line: &str) -> Vec<i32> {
     let (right_lower, right_higher) = right.split_once("-")
         .expect(format!("Not a standard line {}", right).as_str());
 
-    vec![
+    [
         left_lower.parse().expect("Not a number"),
         left_higher.parse().expect("Not a number"),
         right_lower.parse().expect("Not a number"),
