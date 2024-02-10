@@ -2,8 +2,8 @@ use std::fs;
 use std::path::Path;
 use std::str::{Lines, from_utf8};
 
-pub fn solution() -> (String, String) {
-    let file_content = fs::read_to_string(Path::new("data/input5.txt"))
+pub fn solution(path: &str) -> (String, String) {
+    let file_content = fs::read_to_string(Path::new(path))
         .expect("Should be able to read files");
 
     let lines = file_content.lines();

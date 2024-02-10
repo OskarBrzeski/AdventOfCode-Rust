@@ -1,13 +1,13 @@
 mod days;
 
 fn main() {
-    println!("Day 1: {:?}", days::day1::solution());
-    println!("Day 2: {:?}", days::day2::solution());
-    println!("Day 3: {:?}", days::day3::solution());
-    println!("Day 4: {:?}", days::day4::solution());
-    println!("Day 5: {:?}", days::day5::solution());
-    println!("Day 6: {:?}", days::day6::solution());
-    println!("Day 7: {:?}", days::day7::solution());
+    println!("Day 1: {:?}", days::day1::solution("data/input1.txt"));
+    println!("Day 2: {:?}", days::day2::solution("data/input2.txt"));
+    println!("Day 3: {:?}", days::day3::solution("data/input3.txt"));
+    println!("Day 4: {:?}", days::day4::solution("data/input4.txt"));
+    println!("Day 5: {:?}", days::day5::solution("data/input5.txt"));
+    println!("Day 6: {:?}", days::day6::solution("data/input6.txt"));
+    println!("Day 7: {:?}", days::day7::solution("data/input7.txt"));
     // println!("Day 8: {:?}", days::day8::solution());
     // println!("Day 9: {:?}", days::day9::solution());
     // println!("Day 10: {:?}", days::day10::solution());

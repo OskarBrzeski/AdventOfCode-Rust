@@ -1,13 +1,13 @@
 use std::fs;
 use std::path::Path;
 
-pub fn solution() -> (i32, i32) {
-    let line = fs::read_to_string(Path::new("data/input6.txt"))
+pub fn solution(path: &str) -> (i32, i32) {
+    let file_content = fs::read_to_string(Path::new(path))
         .expect("Should be able to read file");
 
     (
-        part1(line.as_bytes()),
-        part2(line.as_bytes()),
+        part1(file_content.as_bytes()),
+        part2(file_content.as_bytes()),
     )
 }
 

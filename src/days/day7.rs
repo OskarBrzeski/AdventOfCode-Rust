@@ -41,9 +41,9 @@ impl Directory {
     }
 }
 
-pub fn solution() -> (i32, i32) {
+pub fn solution(path: &str) -> (i32, i32) {
     let file_content =
-        fs::read_to_string(Path::new("data/input7.txt")).expect("Should be able to read file");
+        fs::read_to_string(Path::new(path)).expect("Should be able to read file");
 
     let lines = file_content.lines();
 
