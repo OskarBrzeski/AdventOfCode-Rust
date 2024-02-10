@@ -27,3 +27,57 @@ fn main() {
     // println!("Day 24: {:?}", days::day24::solution());
     // println!("Day 25: {:?}", days::day25::solution());
 }
+
+#[cfg(test)]
+mod tests {
+    use super::days;
+
+    #[test]
+    fn test_day1() {
+        let result = days::day1::solution("test_data/input1.txt");
+        assert_eq!(result.0, 24000);
+        assert_eq!(result.1, 45000);
+    }
+
+    #[test]
+    fn test_day2() {
+        let result = days::day2::solution("test_data/input2.txt");
+        assert_eq!(result.0, 15);
+        assert_eq!(result.1, 12);
+    }
+    
+    #[test]
+    fn test_day3() {
+        let result = days::day3::solution("test_data/input3.txt");
+        assert_eq!(result.0, 157);
+        assert_eq!(result.1, 70);
+    }
+
+    #[test]
+    fn test_day4() {
+        let result = days::day4::solution("test_data/input4.txt");
+        assert_eq!(result.0, 2);
+        assert_eq!(result.1, 4);
+    }
+
+    #[test]
+    fn test_day5() {
+        let result = days::day5::solution("test_data/input5.txt");
+        assert_eq!(result.0, String::from("CMZ"));
+        assert_eq!(result.1, String::from("MCD"));
+    }
+
+    #[test]
+    fn test_day6() {
+        let result = days::day6::solution("test_data/input6.txt");
+        assert_eq!(result.0, 7);
+        assert_eq!(result.1, 19);
+    }
+
+    #[test]
+    fn test_day7() {
+        let result = days::day7::solution("test_data/input7.txt");
+        assert_eq!(result.0, 95437);
+        assert_eq!(result.1, 24933642);
+    }
+}
