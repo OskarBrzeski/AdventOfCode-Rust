@@ -42,8 +42,7 @@ impl Directory {
 }
 
 pub fn solution(path: &str) -> (i32, i32) {
-    let file_content =
-        fs::read_to_string(Path::new(path)).expect("Should be able to read file");
+    let file_content = fs::read_to_string(Path::new(path)).expect("Should be able to read file");
 
     let lines = file_content.lines();
 
@@ -147,6 +146,12 @@ fn create_file_tree(commands: Vec<Command>) -> (Directory, Vec<i32>) {
             }
         }
     }
+
+    let mut curr = &mut file_tree;
+    for dir_name in current_dir.iter() {
+        curr = curr.dirs.get_mut(*dir_name).unwrap();
+    }
+    file_sizes.push(curr.total_size());
 
     file_sizes.push(file_tree.total_size());
 
