@@ -9,7 +9,7 @@ cargo run
 
 To run tests, use:
 ```bash
-cargo run -- --skip 5 --nocapture
+cargo test -- --skip 5 --nocapture
 ```
 
 Currently, solution 5 does not work with the test input.
