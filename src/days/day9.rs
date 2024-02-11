@@ -23,109 +23,98 @@ pub fn solution(path: &str) -> (i32, i32) {
 
 fn part1(movements: &Vec<Movement>) -> i32 {
     let mut visited: HashSet<(isize, isize)> = HashSet::new();
-    visited.insert((0, 0));
 
     let mut head = vec![0, 0];
     let mut tail = vec![0, 0];
 
     for movement in movements {
+        let mut head_dx = 0;
+        let mut head_dy = 0;
+        let loop_amount;
+
         match movement {
             Movement::Up(amount) => {
-                for _ in 0..*amount {
-                    head[1] += 1;
-                    update_tail(&head, &mut tail);
-                    visited.insert((tail[0], tail[1]));
-                }
+                head_dy = 1;
+                loop_amount = *amount;
             }
             Movement::Down(amount) => {
-                for _ in 0..*amount {
-                    head[1] -= 1;
-                    update_tail(&head, &mut tail);
-                    visited.insert((tail[0], tail[1]));
-                }
+                head_dy = -1;
+                loop_amount = *amount;
             }
             Movement::Left(amount) => {
-                for _ in 0..*amount {
-                    head[0] -= 1;
-                    update_tail(&head, &mut tail);
-                    visited.insert((tail[0], tail[1]));
-                }
+                head_dx = -1;
+                loop_amount = *amount;
             }
             Movement::Right(amount) => {
-                for _ in 0..*amount {
-                    head[0] += 1;
-                    update_tail(&head, &mut tail);
-                    visited.insert((tail[0], tail[1]));
-                }
+                head_dx = 1;
+                loop_amount = *amount;
             }
         }
+
+        for _ in 0..loop_amount {
+            head[0] += head_dx;
+            head[1] += head_dy;
+            update_tail(&head, &mut tail);
+            visited.insert((tail[0], tail[1]));
+        }
     }
+
     visited.len() as i32
 }
 
 fn part2(movements: &Vec<Movement>) -> i32 {
     let mut visited: HashSet<(isize, isize)> = HashSet::new();
-    visited.insert((0, 0));
 
     let mut rope_parts: Vec<Vec<isize>> = vec![
-        vec![0, 0], vec![0, 0], vec![0, 0], vec![0, 0], vec![0, 0], 
-        vec![0, 0], vec![0, 0], vec![0, 0], vec![0, 0], vec![0, 0], 
+        vec![0, 0],
+        vec![0, 0],
+        vec![0, 0],
+        vec![0, 0],
+        vec![0, 0],
+        vec![0, 0],
+        vec![0, 0],
+        vec![0, 0],
+        vec![0, 0],
+        vec![0, 0],
     ];
 
     for movement in movements {
+        let mut head_dx = 0;
+        let mut head_dy = 0;
+        let loop_amount;
+
         match movement {
             Movement::Up(amount) => {
-                for _ in 0..*amount {
-                    rope_parts[0][1] += 1;
-                    for i in 1..10 {
-                        let mut proxy = vec![rope_parts[i][0], rope_parts[i][1]];
-                        update_tail(&rope_parts[i-1], &mut proxy);
-                        rope_parts[i][0] = proxy[0];
-                        rope_parts[i][1] = proxy[1];
-                    }
-                    let last = rope_parts.last().unwrap();
-                    visited.insert((last[0], last[1]));
-                }
+                head_dy = 1;
+                loop_amount = *amount;
             }
             Movement::Down(amount) => {
-                for _ in 0..*amount {
-                    rope_parts[0][1] -= 1;
-                    for i in 1..10 {
-                        let mut proxy = vec![rope_parts[i][0], rope_parts[i][1]];
-                        update_tail(&rope_parts[i-1], &mut proxy);
-                        rope_parts[i][0] = proxy[0];
-                        rope_parts[i][1] = proxy[1];
-                    }
-                    let last = rope_parts.last().unwrap();
-                    visited.insert((last[0], last[1]));
-                }
+                head_dy = -1;
+                loop_amount = *amount;
             }
             Movement::Left(amount) => {
-                for _ in 0..*amount {
-                    rope_parts[0][0] -= 1;
-                    for i in 1..10 {
-                        let mut proxy = vec![rope_parts[i][0], rope_parts[i][1]];
-                        update_tail(&rope_parts[i-1], &mut proxy);
-                        rope_parts[i][0] = proxy[0];
-                        rope_parts[i][1] = proxy[1];
-                    }
-                    let last = rope_parts.last().unwrap();
-                    visited.insert((last[0], last[1]));
-                }
+                head_dx = -1;
+                loop_amount = *amount;
             }
             Movement::Right(amount) => {
-                for _ in 0..*amount {
-                    rope_parts[0][0] += 1;
-                    for i in 1..10 {
-                        let mut proxy = vec![rope_parts[i][0], rope_parts[i][1]];
-                        update_tail(&rope_parts[i-1], &mut proxy);
-                        rope_parts[i][0] = proxy[0];
-                        rope_parts[i][1] = proxy[1];
-                    }
-                    let last = rope_parts.last().unwrap();
-                    visited.insert((last[0], last[1]));
-                }
+                head_dx = 1;
+                loop_amount = *amount;
             }
+        };
+
+        for _ in 0..loop_amount {
+            rope_parts[0][0] += head_dx;
+            rope_parts[0][1] += head_dy;
+
+            for i in 1..10 {
+                let mut proxy = vec![rope_parts[i][0], rope_parts[i][1]];
+                update_tail(&rope_parts[i - 1], &mut proxy);
+                rope_parts[i][0] = proxy[0];
+                rope_parts[i][1] = proxy[1];
+            }
+
+            let last = rope_parts.last().unwrap();
+            visited.insert((last[0], last[1]));
         }
     }
 
@@ -165,7 +154,7 @@ fn update_tail(head: &Vec<isize>, tail: &mut Vec<isize>) {
 
         return;
     }
-    
+
     if head[0] == tail[0] {
         if head[1] - tail[1] > 1 {
             tail[1] += 1;
