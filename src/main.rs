@@ -10,7 +10,7 @@ fn main() {
     println!("Day 7: {:?}", days::day7::solution("data/input7.txt"));
     println!("Day 8: {:?}", days::day8::solution("data/input8.txt"));
     println!("Day 9: {:?}", days::day9::solution("data/input9.txt"));
-    // println!("Day 10: {:?}", days::day10::solution());
+    println!("Day 10: {:?}", days::day10::solution("data/input10.txt"));
     // println!("Day 11: {:?}", days::day11::solution());
     // println!("Day 12: {:?}", days::day12::solution());
     // println!("Day 13: {:?}", days::day13::solution());
@@ -95,5 +95,11 @@ mod tests {
         assert_eq!(result.1, 1);
         let result = days::day9::solution("test_data/input9-2.txt");
         assert_eq!(result.1, 36);
+    }
+
+    #[test]
+    fn test_day10() {
+        let result = days::day10::solution("test_data/input10.txt");
+        assert_eq!(result.0, 13140);
     }
 }
